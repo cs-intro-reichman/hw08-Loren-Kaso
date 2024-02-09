@@ -61,7 +61,7 @@ class PlayList {
         if (this.size <= 0){
             System.out.println("this list empty");
         }
-        tracks[this.size] = null;
+        tracks[this.size - 1] = null;
         this.size--;
     }
     
