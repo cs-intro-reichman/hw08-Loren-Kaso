@@ -58,7 +58,7 @@ class PlayList {
     /** Removes the last track from this list. If the list is empty, does nothing. */
      public void removeLast() {
         //// replace this comment with your code
-        if (this.size <= 0){
+        if (this.size == 0){
             System.out.println("this list empty");
         }
         tracks[this.size - 1] = null;
@@ -79,7 +79,7 @@ class PlayList {
      *  If such a track is not found, returns -1. */
     public int indexOf(String title) {
         //// replace the following statement with your code
-        if(this.size <= 0){
+        if(this.size == 0){
             return -1;
         }
 
