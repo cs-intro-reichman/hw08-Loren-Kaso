@@ -38,7 +38,7 @@ class PlayList {
         //// replace the following statement with your code
         if (this.maxSize == this.size)
             return false;
-        tracks[size + 1] = track;
+        tracks[size] = track;
         this.size++;    
         return true;
     }
@@ -61,7 +61,7 @@ class PlayList {
         if (this.size == 0){
             return;
         }
-        tracks[this.size] = null;
+        tracks[size - 1] = null;
         this.size--;
     }
     
@@ -142,10 +142,9 @@ class PlayList {
     public void removeFirst() {
         //// replace this comment with your code
         if(size == 0){
-            System.out.println("empty list");
             return;
         }
-        remove(0);
+        this.remove(0);
     }
     
     /** Adds all the tracks in the other list to the end of this list. 
@@ -154,7 +153,6 @@ class PlayList {
      public void add(PlayList other) {
         //// replace this comment with your code
         if (this.size + other.size > other.maxSize){
-            System.out.println("total size of both too big");
             return;
         }
 
