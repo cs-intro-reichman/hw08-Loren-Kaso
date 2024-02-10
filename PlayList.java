@@ -59,7 +59,6 @@ class PlayList {
      public void removeLast() {
         //// replace this comment with your code
         if (this.size == 0){
-            System.out.println("this list empty");
             return;
         }
         tracks[this.size - 1] = null;
@@ -116,19 +115,16 @@ class PlayList {
      *  does nothing and returns -1. */
     public void remove(int i) {
         //// replace this comment with your code
-        if (size == 0 || i < 0 || maxSize < i ){
-            System.out.println("-1");
+        if (size == 0 || i < 0 || maxSize <= i ){
             return;
         }   
-        if (i == 0){
-            this.removeFirst();
-        }else if (i == size){
+        if (i == size){
             this.removeLast();
         }else{
-            for (int j = i ; j < size - 1; j++) {
+            for (int j = i ; j <= size - i; j++) {
                 tracks[j] = tracks[j + 1];
             }
-            tracks[size - 1] = null;
+            tracks[size - i] = null;
             this.size--;
         }
     }
@@ -149,11 +145,7 @@ class PlayList {
             System.out.println("empty list");
             return;
         }
-        for (int i = 1; i < size; i++) {
-            tracks[i - 1] = tracks[i];
-        }
-        tracks[size - 1] = null; 
-        this.size--;
+        remove(0);
     }
     
     /** Adds all the tracks in the other list to the end of this list. 
