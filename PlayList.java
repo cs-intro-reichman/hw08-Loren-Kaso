@@ -60,6 +60,7 @@ class PlayList {
         //// replace this comment with your code
         if (this.size == 0){
             System.out.println("this list empty");
+            return;
         }
         tracks[this.size - 1] = null;
         this.size--;
@@ -115,16 +116,21 @@ class PlayList {
      *  does nothing and returns -1. */
     public void remove(int i) {
         //// replace this comment with your code
-        if (size == 0 || i < 0 || size < i ){
+        if (size == 0 || i < 0 || maxSize < i ){
             System.out.println("-1");
             return;
-        }
-            tracks[i] = null;
-            for (int j = i + 1; j < size; j++) {
-                tracks[j - 1] = tracks[j];
+        }   
+        if (i == 0){
+            this.removeFirst();
+        }else if (i == size){
+            this.removeLast();
+        }else{
+            for (int j = i ; j < size - 1; j++) {
+                tracks[j] = tracks[j + 1];
             }
             tracks[size - 1] = null;
             this.size--;
+        }
     }
 
     /** Removes the first track that has the given title from this list.
@@ -132,19 +138,8 @@ class PlayList {
      *  is negative or too big for this list, does nothing. */
     public void remove(String title) {
         //// replace this comment with your code
-        for (int i = 0; i < size; i++) {
-            if (tracks[i].getTitle().toLowerCase().equals(title.toLowerCase())){
-                tracks[i] = null;
-
-                for (int j = i + 1; j < size; j++) {
-                    tracks[j - 1] = tracks[j];
-                }
-                break;
-            }
-        }
-        tracks[size - 1] = null;
-        this.size--;
-
+        int index = indexOf(title);
+        this.remove(index);
     }
 
     /** Removes the first track from this list. If the list is empty, does nothing. */
@@ -154,7 +149,6 @@ class PlayList {
             System.out.println("empty list");
             return;
         }
-        tracks[0] = null;
         for (int i = 1; i < size; i++) {
             tracks[i - 1] = tracks[i];
         }
