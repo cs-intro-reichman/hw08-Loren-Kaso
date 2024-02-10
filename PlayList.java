@@ -61,7 +61,7 @@ class PlayList {
         if (this.size == 0){
             return;
         }
-        tracks[this.size - 1] = null;
+        tracks[this.size] = null;
         this.size--;
     }
     
