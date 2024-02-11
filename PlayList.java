@@ -51,7 +51,7 @@ class PlayList {
         for (int i = 0; i < this.size; i++) {
             if(tracks[i] != null){
                 sb.append(tracks[i].toString());
-                sb.append(" ");
+                sb.append("\n");
             }
         }
         return sb.toString();
@@ -60,7 +60,7 @@ class PlayList {
     /** Removes the last track from this list. If the list is empty, does nothing. */
      public void removeLast() {
         //// replace this comment with your code
-        if (this.size == 0){
+        if (this.size <= 0){
             return;
         }
         tracks[size - 1] = null;
@@ -74,7 +74,6 @@ class PlayList {
         for (int i = 0; i < size; i++) {
             totalSec += (tracks[i].getDuration());
         }
-        totalSec *= 1000;
         return totalSec;
     }
 
@@ -82,12 +81,11 @@ class PlayList {
      *  If such a track is not found, returns -1. */
     public int indexOf(String title) {
         //// replace the following statement with your code
-        if(this.size == 0){
+        if(this.size <= 0){
             return -1;
         }
-
         for (int i = 0; i < this.size; i++) {
-            if (tracks[i].getTitle().equals(title))
+            if (tracks[i].getTitle().toLowerCase().equals(title.toLowerCase()))
                 return i;
         }
         return -1;
@@ -101,14 +99,19 @@ class PlayList {
      *  returns true. */
     public boolean add(int i, Track track) {
         //// replace the following statement with your code
-        if ( i < 0 || this.maxSize <= i || this.maxSize == this.size){
+        if ( i < 0 || this.maxSize <= i || this.maxSize <= this.size){
             return false;
         }
-
-        for (int j = size - 1; j >= i; j--){
-            tracks[j + 1] = tracks[j];
+        if(size == 0){
+            add(track);
+        }else if(size == i){
+            add(track);
+        }else{
+            for (int j = size - i; j >= i; j--){
+                tracks[j + 1] = tracks[j];
+            }
+            tracks[i] = track;
         }
-        tracks[i] = track;
         this.size++; 
         return true;
     }
@@ -122,16 +125,14 @@ class PlayList {
             return;
         }   
         if (i == size - 1){
-            this.removeLast();
+            this.removeLast(); 
             return;
         }
-
         for (int j = i ; j < size - i; j++) {
             tracks[j] = tracks[j + 1];
         }
-        tracks[size - i] = null;
+        tracks[size - i + 1] = null;
         this.size--;
-         
     }
 
     /** Removes the first track that has the given title from this list.
@@ -146,7 +147,7 @@ class PlayList {
     /** Removes the first track from this list. If the list is empty, does nothing. */
     public void removeFirst() {
         //// replace this comment with your code
-        if(size == 0){
+        if(size <= 0){
             return;
         }
         this.remove(0);
@@ -160,11 +161,11 @@ class PlayList {
         if (this.size + other.size > other.maxSize){
             return;
         }
-
-        for (int i = 0; i <= this.size; i++) {
-            other.tracks[other.size + i] = this.tracks[i];
+        int bothSize = this.size;
+        for (int i = 0; i <= other.getSize(); i++) {
+            add(bothSize, other.getTrack(i));
+            bothSize++;
         }
-        other.size += this.size; 
     }
 
     /** Returns the index in this list of the track that has the shortest duration,
@@ -180,6 +181,7 @@ class PlayList {
         
         int minIndex = start;
         for (int i = start + 1; i < size; i++) {
+            if (tracks[i] != null)
             if(tracks[i].getDuration() < tracks[minIndex].getDuration()){
                 minIndex = i;
             }
@@ -202,7 +204,7 @@ class PlayList {
         // calling the minIndex method in each iteration.
         //// replace this statement with your code
         int min = 0;
-        for (int i = 0; i < this.size ; i++) {
+        for (int i = 0; i < this.size - 1; i++) {
             min = minIndex(i);
             if(min != -1 || min != i){
                 Track temp = tracks[i];

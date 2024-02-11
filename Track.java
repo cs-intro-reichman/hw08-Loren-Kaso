@@ -45,7 +45,10 @@ class Track {
         //// replace the following statement with your code
         int min = totalSeconds / 60;
         int sec = totalSeconds % 60;
-        String s = "" + min + ":" + sec; 
-        return s;
+        if(0 <= sec && sec <= 9){
+            return String.format("%1$s:0%2$s",min ,sec);
+        }else{
+            return String.format("%1$s:%2$s",min ,sec);
+        }  
     }
 }
