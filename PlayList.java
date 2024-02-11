@@ -49,8 +49,10 @@ class PlayList {
         //// replace the following statement with your code
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.size; i++) {
-            sb.append(tracks[i].toString());
-            sb.append(" ");
+            if(tracks[i] != null){
+                sb.append(tracks[i].toString());
+                sb.append(" ");
+            }
         }
         return sb.toString();
     }
@@ -69,9 +71,10 @@ class PlayList {
     public int totalDuration() {
         //// replace the following statement with your code
         int totalSec = 0;
-        for (int i = 0; i < tracks.length; i++) {
-            totalSec += (tracks[i].getDuration() * 1000);
+        for (int i = 0; i < size; i++) {
+            totalSec += (tracks[i].getDuration());
         }
+        totalSec *= 1000;
         return totalSec;
     }
 
@@ -84,7 +87,7 @@ class PlayList {
         }
 
         for (int i = 0; i < this.size; i++) {
-            if (tracks[i].getTitle().toLowerCase().equals(title.toLowerCase()))
+            if (tracks[i].getTitle().equals(title))
                 return i;
         }
         return -1;
@@ -118,15 +121,17 @@ class PlayList {
         if (size == 0 || i < 0 || maxSize <= i ){
             return;
         }   
-        if (i == size){
+        if (i == size - 1){
             this.removeLast();
-        }else{
-            for (int j = i ; j <= size - i; j++) {
-                tracks[j] = tracks[j + 1];
-            }
-            tracks[size - i] = null;
-            this.size--;
+            return;
         }
+
+        for (int j = i ; j < size - i; j++) {
+            tracks[j] = tracks[j + 1];
+        }
+        tracks[size - i] = null;
+        this.size--;
+         
     }
 
     /** Removes the first track that has the given title from this list.
@@ -156,7 +161,7 @@ class PlayList {
             return;
         }
 
-        for (int i = 1; i < other.maxSize; i++) {
+        for (int i = 0; i <= this.size; i++) {
             other.tracks[other.size + i] = this.tracks[i];
         }
         other.size += this.size; 

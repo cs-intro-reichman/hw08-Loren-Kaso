@@ -20,7 +20,7 @@ class RuniFi {
         myList.add(track3);
         myList.add(track4);
 
-        // Displays the list
+        //Displays the list
         display("My list", myList);
 
         // Displays the total duration
