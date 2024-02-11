@@ -36,7 +36,7 @@ class PlayList {
      *  Otherwise, appends the track and returns true. */
     public boolean add(Track track) {
         //// replace the following statement with your code
-        if (this.maxSize == this.size)
+        if (this.maxSize <= this.size)
             return false;
         tracks[size] = track;
         this.size++;    
@@ -72,7 +72,7 @@ class PlayList {
         //// replace the following statement with your code
         int totalSec = 0;
         for (int i = 0; i < size; i++) {
-            totalSec += (tracks[i].getDuration());
+            totalSec += tracks[i].getDuration();
         }
         return totalSec;
     }
@@ -128,7 +128,7 @@ class PlayList {
             this.removeLast(); 
             return;
         }
-        for (int j = i ; j < size - i; j++) {
+        for (int j = i ; j <= size - i; j++) {
             tracks[j] = tracks[j + 1];
         }
         tracks[size - i] = null;
@@ -161,10 +161,10 @@ class PlayList {
         if (this.size + other.size > other.maxSize){
             return;
         }
-        int bothSize = this.size;
+        int addTsize = this.size;
         for (int i = 0; i <= other.getSize(); i++) {
-            add(bothSize, other.getTrack(i));
-            bothSize++;
+            add(addTsize, other.getTrack(i));
+            addTsize++;
         }
     }
 
