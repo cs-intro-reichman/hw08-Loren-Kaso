@@ -81,12 +81,10 @@ class PlayList {
      *  If such a track is not found, returns -1. */
     public int indexOf(String title) {
         //// replace the following statement with your code
-        if(this.size <= 0){
-            return -1;
-        }
         for (int i = 0; i < this.size; i++) {
-            if (tracks[i].getTitle().toLowerCase().equals(title.toLowerCase()))
+            if (tracks[i].getTitle().toLowerCase().equals(title.toLowerCase())){
                 return i;
+            }
         }
         return -1;
     }
@@ -121,7 +119,7 @@ class PlayList {
      *  does nothing and returns -1. */
     public void remove(int i) {
         //// replace this comment with your code
-        if (size == 0 || i < 0 || maxSize <= i ){
+        if (size == 0 || i < 0 || size <= i ){
             return;
         }   
         if (i == size - 1){
