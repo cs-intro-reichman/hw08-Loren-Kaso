@@ -49,10 +49,10 @@ class PlayList {
         //// replace the following statement with your code
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.size; i++) {
-            if(tracks[i] != null){
-                sb.append(tracks[i].toString());
-                sb.append("\n");
-            }
+                if (tracks[i] != null){
+                    sb.append(getTrack(i).toString());
+                    sb.append("\n");
+                }
         }
         return sb.toString();
     }
@@ -156,7 +156,7 @@ class PlayList {
     //// An elegant and terribly inefficient implementation.
      public void add(PlayList other) {
         //// replace this comment with your code
-        if (this.size + other.size > other.maxSize){
+        if (this.size + other.getSize() >= this.maxSize){
             return;
         }
         int addTsize = this.size;
@@ -178,7 +178,7 @@ class PlayList {
             return -1;
         
         int minIndex = start;
-        for (int i = start + 1; i < size; i++) {
+        for (int i = start ; i < size; i++) {
             if (tracks[i] != null)
             if(tracks[i].getDuration() < tracks[minIndex].getDuration()){
                 minIndex = i;
