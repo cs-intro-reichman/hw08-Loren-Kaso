@@ -49,10 +49,8 @@ class PlayList {
         //// replace the following statement with your code
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.size; i++) {
-                if (tracks[i] != null){
-                    sb.append(getTrack(i).toString());
-                    sb.append("\n");
-                }
+                sb.append(getTrack(i).toString());
+                sb.append("\n");
         }
         return sb.toString();
     }
@@ -72,8 +70,7 @@ class PlayList {
         //// replace the following statement with your code
         int totalSec = 0;
         for (int i = 0; i < size; i++) {
-            if (tracks[i] != null)
-                totalSec += tracks[i].getDuration();
+            totalSec += tracks[i].getDuration();
         }
         return totalSec;
     }
@@ -82,9 +79,10 @@ class PlayList {
      *  If such a track is not found, returns -1. */
     public int indexOf(String title) {
         //// replace the following statement with your code
+        String toLowTitle = title.toLowerCase();
         for (int i = 0; i < this.size; i++) {
             if (tracks[i].getTitle() != null)
-                if (tracks[i].getTitle().toLowerCase().equals(title.toLowerCase())){
+                if (tracks[i].getTitle().toLowerCase().equals(toLowTitle)){
                     return i;
                 }
         }
@@ -104,16 +102,18 @@ class PlayList {
         }
         if(size == 0){
             add(track);
+            return true;
         }else if(size == i){
             add(track);
+            return true;
         }else{
             for (int j = size - i; j >= i; j--){
                 tracks[j + 1] = tracks[j];
             }
             tracks[i] = track;
+            this.size++; 
+            return true;
         }
-        this.size++; 
-        return true;
     }
      
     /** Removes the track in the given index from this list.
@@ -178,15 +178,15 @@ class PlayList {
         //// replace the following statement with your code
         if(start < 0 || size - 1 < start)
             return -1;
-        
-        int minIndex = start;
+        int index = 0;
+        int minDur = tracks[start].getDuration();
         for (int i = start ; i < size; i++) {
-            if (tracks[i] != null)
-            if(tracks[i].getDuration() < tracks[minIndex].getDuration()){
-                minIndex = i;
+            if(tracks[i].getDuration() < minDur){
+                index = i;
+                minDur = tracks[i].getDuration();
             }
         }
-        return minIndex;
+        return index;
     }
 
     /** Returns the title of the shortest track in this list. 
