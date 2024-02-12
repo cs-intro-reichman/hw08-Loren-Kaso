@@ -72,7 +72,8 @@ class PlayList {
         //// replace the following statement with your code
         int totalSec = 0;
         for (int i = 0; i < size; i++) {
-            totalSec += tracks[i].getDuration();
+            if (tracks[i] != null)
+                totalSec += tracks[i].getDuration();
         }
         return totalSec;
     }
@@ -82,9 +83,10 @@ class PlayList {
     public int indexOf(String title) {
         //// replace the following statement with your code
         for (int i = 0; i < this.size; i++) {
-            if (tracks[i].getTitle().toLowerCase().equals(title.toLowerCase())){
-                return i;
-            }
+            if (tracks[i] != null)
+                if (tracks[i].getTitle().toLowerCase().equals(title.toLowerCase())){
+                    return i;
+                }
         }
         return -1;
     }
