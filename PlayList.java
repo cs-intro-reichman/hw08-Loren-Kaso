@@ -49,8 +49,10 @@ class PlayList {
         //// replace the following statement with your code
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.size; i++) {
+            if (tracks[i] != null){
                 sb.append(getTrack(i).toString());
                 sb.append("\n");
+            }
         }
         return sb.toString();
     }
@@ -63,6 +65,7 @@ class PlayList {
         }
         tracks[size - 1] = null;
         this.size--;
+        this.toString();
     }
     
     /** Returns the total duration (in seconds) of all the tracks in this list.*/
@@ -161,10 +164,10 @@ class PlayList {
         if (this.size + other.getSize() >= this.maxSize){
             return;
         }
-        int addTsize = this.size;
+        int addSize = this.size;
         for (int i = 0; i <= other.getSize(); i++) {
-            add(addTsize, other.getTrack(i));
-            addTsize++;
+            add(addSize, other.getTrack(i));
+            addSize++;
         }
     }
 
@@ -181,6 +184,7 @@ class PlayList {
         int index = 0;
         int minDur = tracks[start].getDuration();
         for (int i = start ; i < size; i++) {
+            if (tracks[i] != null)
             if(tracks[i].getDuration() < minDur){
                 index = i;
                 minDur = tracks[i].getDuration();
