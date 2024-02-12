@@ -136,6 +136,7 @@ class PlayList {
         }
         tracks[size - i + 1] = null;
         this.size--;
+        this.toString();
     }
 
     /** Removes the first track that has the given title from this list.
@@ -154,6 +155,7 @@ class PlayList {
             return;
         }
         this.remove(0);
+        this.toString();
     }
     
     /** Adds all the tracks in the other list to the end of this list. 
@@ -169,6 +171,7 @@ class PlayList {
             add(addSize, other.getTrack(i));
             addSize++;
         }
+        this.toString();
     }
 
     /** Returns the index in this list of the track that has the shortest duration,
@@ -216,5 +219,6 @@ class PlayList {
                 tracks [min] = temp;
             }
         }
+        this.toString();
     }
 }
